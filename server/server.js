@@ -36,16 +36,35 @@ io.on('connection',(socket)=>{
   // },5000);
   //
   // var y = function(){
-    socket.on('createMessage',(msg)=>{
-      var D = new Date();
-      io.emit('newMessage',{
-        from:msg.from,text:msg.text,createdAt: `${D.getHours()}:${D.getMinutes()}`
-      })
+  var D = new Date();
+  socket.emit('newMessage',{
+    from:'Admin',
+    text:'Welcome to the chat room!!'
+  })
+
+  socket.broadcast.emit('newMessage',{
+    from:'Admin',
+    text:'New user joined!!',
+    createdAt: `${D.getHours()}:${D.getMinutes()}`
+  })
+
+  socket.on('createMessage',(msg)=>{
+
+    io.emit('newMessage',{
+      from:msg.from,text:msg.text,createdAt: `${D.getHours()}:${D.getMinutes()}`
+    })
       //socket.emit() emits an event to a single connections while io.emit() emits the event to all the connections
       //var D = new Date();
       // socket.emit('newMessage',{
       //   from:msg.from,text:msg.text,createdAt: `${D.getHours()}-${D.getMinutes()}`
       // })
+
+    //   /*sends this to everybody but this socket*/socket.broadcast.emit('newMessage',{
+    //   from:msg.from,
+    //   text:msg.text,
+    //   createdAt: `${D.getHours()}:${D.getMinutes()}`
+    // });
+
     });
   //}
 
@@ -57,3 +76,37 @@ io.on('connection',(socket)=>{
 server.listen(port,()=>{
   console.log(`server is up and running on ${port}`);
 });
+// const path = require('path');
+// const express = require('express');
+// const http = require('http');
+// const socketIO = require('socket.io');
+// var publicPath = path.join(__dirname,'../public');
+//
+// var app = express();
+// app.use(express.static(publicPath));
+// var server = http.createServer(app);
+// var io = socketIO(server);
+// var port = process.env.PORT || 3000;
+//
+// io.on('connection',(socket)=>{
+//   socket.emit('newMessage',{
+//     from:'Admint',
+//     text:'Welcome to chatroom'
+//   })
+//   socket.broadcast.emit('newMessage',{
+//     from:'Admin',
+//     text:'New user just connected'
+//   })
+//   socket.on('createMessage',(msg)=>{
+//     io.emit('newMessage',{
+//       from:msg.from,
+//       text:msg.text,
+//       time:`${new Date().getHours()}: ${new Date().getMinutes()}`
+//     });
+//   });
+//
+// });
+//
+// server.listen(port,()=>{
+//   console.log('PORT is',port);
+// })
