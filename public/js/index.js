@@ -5,16 +5,9 @@ socket.on('connect',function(){
   //   to:'FF@gmail.com',
   //   text:"WorldHello"
   // })
-  //x();
-  socket.emit('createMessage',{from:'Dhagia',text:'NONO'});
+  //socket.emit('createMessage',{from:'Dhagia',text:'NONO'});
 
 });
-
-// var x = function(){
-//   socket.emit('createMessage',{
-//     from:'Alay', text:'Hiya'
-//   });
-// }
 
 socket.on('newMessage',function(msg){
   console.log(`${msg.from}: ${msg.text}\ntime:${msg.createdAt}`);

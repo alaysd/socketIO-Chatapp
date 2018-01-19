@@ -38,9 +38,14 @@ io.on('connection',(socket)=>{
   // var y = function(){
     socket.on('createMessage',(msg)=>{
       var D = new Date();
-      socket.emit('newMessage',{
-        from:msg.from,text:msg.text,createdAt: `${D.getHours()}-${D.getMinutes()}` 
+      io.emit('newMessage',{
+        from:msg.from,text:msg.text,createdAt: `${D.getHours()}:${D.getMinutes()}`
       })
+      //socket.emit() emits an event to a single connections while io.emit() emits the event to all the connections
+      //var D = new Date();
+      // socket.emit('newMessage',{
+      //   from:msg.from,text:msg.text,createdAt: `${D.getHours()}-${D.getMinutes()}`
+      // })
     });
   //}
 
