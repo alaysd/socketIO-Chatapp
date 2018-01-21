@@ -3,6 +3,9 @@ const publicPath = path.join(__dirname,'../public');//Directly enters into publi
 const express = require('express');
 const socketIO = require('socket.io');
 const http = require('http');
+
+const {generateMessage} = require('./utils/message');
+
 // console.log(__dirname+'/../public'); //this type of path goes inside server, comes out then goes into public
 // console.log(publicPath);
 
@@ -37,22 +40,13 @@ io.on('connection',(socket)=>{
   //
   // var y = function(){
   var D = new Date();
-  socket.emit('newMessage',{
-    from:'Admin',
-    text:'Welcome to the chat room!!'
-  })
+  socket.emit('newMessage',generateMessage('Admin','WELCOME TO THE CHAT APP'))
 
-  socket.broadcast.emit('newMessage',{
-    from:'Admin',
-    text:'New user joined!!',
-    createdAt: `${D.getHours()}:${D.getMinutes()}`
-  })
+  socket.broadcast.emit('newMessage',generateMessage('Admin','NEW USER JOINED'))
 
   socket.on('createMessage',(msg)=>{
 
-    io.emit('newMessage',{
-      from:msg.from,text:msg.text,createdAt: `${D.getHours()}:${D.getMinutes()}`
-    })
+    io.emit('newMessage',generateMessage(message.from,message.text));
       //socket.emit() emits an event to a single connections while io.emit() emits the event to all the connections
       //var D = new Date();
       // socket.emit('newMessage',{
