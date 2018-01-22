@@ -44,9 +44,10 @@ io.on('connection',(socket)=>{
 
   socket.broadcast.emit('newMessage',generateMessage('Admin','NEW USER JOINED'))
 
-  socket.on('createMessage',(msg)=>{
+  socket.on('createMessage',(msg,callback)=>{
 
-    io.emit('newMessage',generateMessage(message.from,message.text));
+    io.emit('newMessage',generateMessage(msg.from,msg.text));
+    callback('This is from the server');
       //socket.emit() emits an event to a single connections while io.emit() emits the event to all the connections
       //var D = new Date();
       // socket.emit('newMessage',{
