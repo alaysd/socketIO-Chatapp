@@ -24,11 +24,14 @@ socket.on('disconnect',function(){
 
 jQuery('#message-form').on('submit',function(e){
   e.preventDefault();
+
+  var messageTextbox = jQuery('[name=message]');
+
   socket.emit('createMessage',{
     from:'User',
-    text: jQuery('[name=message]').val()
+    text: messageTextbox.val()
   },function(){
-
+    messageTextbox.val('')
   });
 });
 
@@ -37,13 +40,17 @@ jQuery('#message-form').on('submit',function(e){
 //   if(!navigator.geolocation){
 //     return alert('geolocation not supported');
 //   }
-//
+//  locationButoon.attr('disabled','disabled').text('Sending location ...')
 //   navigator.geolocation.getCurrentPosition(function(position){
-//     console.log(postion);
+//  locationButton.removeAttr('disabled').text('Send location');
+//  console.log(postion);
 //   },function(){
 //     alert('unable to fetch location');
 //   });
 // });
+
+
+
 // socket.on('newEmail',function(email){
 //   console.log('New email',email);
 // });
