@@ -10,12 +10,20 @@ socket.on('connect',function(){
 });
 
 socket.on('newMessage',function(msg){
-  console.log(`${msg.from}: ${msg.text}\ntime:${msg.createdAt}`);
+  var template = jQuery('#message-template').html();
+  var html = Mustache.render(template,{
+    text: msg.text,
+    from: msg.from,
+    createdAt: msg.createdAt
+  });
 
-  var li = jQuery('<li></li>');
-  li.text(`${msg.from} ${msg.createdAt}: ${msg.text}`);
-
-  jQuery('#messages').append(li);
+  jQuery('#messages').append(html);
+  // console.log(`${msg.from}: ${msg.text}\ntime:${msg.createdAt}`);
+  //
+  // var li = jQuery('<li></li>');
+  // li.text(`${msg.from} ${msg.createdAt} : ${msg.text}`);
+  //
+  // jQuery('#messages').append(li);
 
 })
 
