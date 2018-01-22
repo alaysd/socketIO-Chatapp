@@ -1,4 +1,21 @@
 var socket = io();
+//NOT WORKING
+// function scrollToBottom(){
+//   // Selectors
+//   var messages = jQuery('#messages');
+//   var newMessage = messages.children('li:last-child');
+//   // Heights
+//   var clientHeight = messages.prop('clientHeight');
+//   var scrollTop = messages.prop('scollTop');
+//   var scrollHeight = messages.prop('scrollHeight');
+//   var newMessageHeight = newMessage.innerHeight();
+//   var lastMessageHeight = newMessage.prev().innerHeight();
+//
+//   if(clientHeight + scrollTop +lastMessageHeight >= scrollHeight){
+//     console.log('Should scroll');
+//   }
+// }
+
 socket.on('connect',function(){
   console.log('Connected');
   // socket.emit('createEmail',{
@@ -24,7 +41,7 @@ socket.on('newMessage',function(msg){
   // li.text(`${msg.from} ${msg.createdAt} : ${msg.text}`);
   //
   // jQuery('#messages').append(li);
-
+  //scrollToBottom();
 })
 
 socket.on('disconnect',function(){
@@ -43,6 +60,14 @@ jQuery('#message-form').on('submit',function(e){
     messageTextbox.val('')
   });
 });
+
+// <!-- For scrolling, there are 3 types of classifications in scroll heights.
+// 1) scrollHeight: entire height of our messages container regardless of how many messages are visible to client.
+// 2) cleintHeight: visible height container.
+// 3) scrollTop: number of pixels we have scrolled down. -->
+//
+// <!-- if scrollTop + clientHeight + new message Height = scrollHeight , then we need to scroll and adjust screen for the view -->
+
 
 // var  locationButton = jQuery('#send-location');
 // locationButton.on('click',function(){
