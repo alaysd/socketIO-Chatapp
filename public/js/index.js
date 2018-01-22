@@ -31,6 +31,19 @@ jQuery('#message-form').on('submit',function(e){
 
   });
 });
+
+// var  locationButton = jQuery('#send-location');
+// locationButton.on('click',function(){
+//   if(!navigator.geolocation){
+//     return alert('geolocation not supported');
+//   }
+//
+//   navigator.geolocation.getCurrentPosition(function(position){
+//     console.log(postion);
+//   },function(){
+//     alert('unable to fetch location');
+//   });
+// });
 // socket.on('newEmail',function(email){
 //   console.log('New email',email);
 // });
