@@ -11,8 +11,9 @@ socket.on('connect',function(){
 
 socket.on('newMessage',function(msg){
   console.log(`${msg.from}: ${msg.text}\ntime:${msg.createdAt}`);
+
   var li = jQuery('<li></li>');
-  li.text(`${msg.from}: ${msg.text}`);
+  li.text(`${msg.from} ${msg.createdAt}: ${msg.text}`);
 
   jQuery('#messages').append(li);
 
